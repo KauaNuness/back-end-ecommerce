@@ -12,9 +12,9 @@ public class CloudinaryConfig {
     @Bean
     public Cloudinary cloudinary(){
         return new Cloudinary(Map.of(
-                "cloud_name", "cloud nome",
-                "api_key", "api key",
-                "api_secret", "api secret"
+                "cloud_name", "dwagsthsl",
+                "api_key", "599781298262136",
+                "api_secret", "RMAv6kosviMSC-0jbobglsL327o"
         ));
     }
 

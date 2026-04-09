@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.List;
 
@@ -23,9 +24,13 @@ public class ProductController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ProductResponseDTO create(
-            @RequestPart("data") ProductRequestDTO dto,
-            @RequestPart("file")MultipartFile file
-            ){
+            @RequestPart("data") String data,
+            @RequestPart("file") MultipartFile file
+    ) throws Exception {
+
+        ObjectMapper mapper = new ObjectMapper();
+        ProductRequestDTO dto = mapper.readValue(data, ProductRequestDTO.class);
+
         String url = imageService.upload(file);
         return service.create(dto, url);
     }
